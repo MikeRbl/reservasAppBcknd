@@ -1,6 +1,7 @@
 using reservasApp.Models;
 using reservasApp.DTOs;
 using Microsoft.EntityFrameworkCore;
+using reservasApp.Namespace;
 
 namespace reservasApp.Services
 {
@@ -23,7 +24,7 @@ namespace reservasApp.Services
                 Estado = "Pendiente"
             };
             _context.Reservaciones.Add(reserva); // Asegúrate que en AppDbContext se llame "Reservaciones"
-            return await _context.SaveChangesAsync() > 0;
+            return await _context.SaveChangesAsync() > 0; // Fix: Call SaveChangesAsync on the DbContext instance
         }
 
         public async Task<bool> CancelarReservacion(int id, int userId)

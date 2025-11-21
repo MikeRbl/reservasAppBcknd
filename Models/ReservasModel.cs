@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using reservasApp.Models;
 
-namespace reservasApp.Models // Asegúrate que el namespace sea consistente
+namespace reservasApp.Models
 {
     public class ReservasModel
     {

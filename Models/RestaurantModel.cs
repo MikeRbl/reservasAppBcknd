@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using reservasApp.Models;
 namespace reservasApp.Namespace
 {
     public class RestaurantModel
@@ -12,5 +13,5 @@ namespace reservasApp.Namespace
     public int UsuarioId { get; set; } // Foreign key to the UserModel
     public UserModel? Dueño { get; set; } // Navigation property for the owner
     public List<MesaModel> Mesas { get; set; } = new(); // Navigation property for tables
-    }
+}
 }

@@ -1,0 +1,8 @@
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.csproj.AssemblyReference.cache
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.AssemblyInfoInputs.cache
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.AssemblyInfo.cs
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.csproj.CoreCompileInputs.cache
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\roble\Documents\ITSES\10mo cuatri\sistemas propietarios\reservas\reservasApp\obj\Debug\net8.0\reservasApp.sourcelink.json

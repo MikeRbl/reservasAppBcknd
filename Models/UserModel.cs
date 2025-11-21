@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace reservasApp.Namespace
+namespace reservasApp.Models
 {
     public class UserModel
     {

@@ -2,11 +2,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace MyApp.Namespace
+namespace reservasApp.Namespace
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AppDbContext : DbContext
+    public class AppDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

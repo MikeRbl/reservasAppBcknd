@@ -1,13 +1,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyApp.Namespace
+namespace reservasApp.Namespace
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserModel : ControllerBase
+    public class UserModel
     {
-        public int Id { get; set; }
+    public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty; // En producción, usa hash

@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyApp.Namespace
+namespace reservasApp.Namespace
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MesaModel : ControllerBase
+    public class MesaModel
     {
         public int Id { get; set; }
     public string NumeroMesa { get; set; } = string.Empty; // Ej: "A1"

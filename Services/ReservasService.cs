@@ -1,7 +1,6 @@
 using reservasApp.Models;
 using reservasApp.DTOs;
 using Microsoft.EntityFrameworkCore;
-using reservasApp.Namespace;
 
 namespace reservasApp.Services
 {

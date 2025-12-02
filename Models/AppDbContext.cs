@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using reservasApp.Models;
 
 
-namespace reservasApp.Namespace
+namespace reservasApp.Models
 {
     public class AppDbContext : DbContext
     {

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using reservasApp.Models;
-namespace reservasApp.Namespace
+namespace reservasApp.Models
 {
     public class RestaurantModel
     {

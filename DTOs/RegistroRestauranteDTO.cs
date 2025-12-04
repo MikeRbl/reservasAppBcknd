@@ -1,8 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace reservasApp.DTOs
 {
     public class RegistroRestauranteDTO
     {
         // Datos del Dueño (Usuario)
+        [JsonPropertyName("nombreDueno")]
         public string NombreDueño { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

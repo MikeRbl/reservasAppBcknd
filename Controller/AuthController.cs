@@ -44,8 +44,11 @@ namespace reservasApp.Controllers
             var usuario = new UserModel
             {
                 Nombre = dto.Nombre,
+                ApellidoPaterno = dto.ApellidoPaterno,
+                ApellidoMaterno = dto.ApellidoMaterno, // Puede ser null
                 Email = dto.Email,
                 Password = dto.Password, // En producción usar Hash!
+                Telefono = dto.Telefono,
                 Rol = "Cliente" // Rol automático
             };
 

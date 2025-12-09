@@ -24,17 +24,36 @@ namespace reservasApp.Controllers
         }
 
         // LOGIN (Ya lo tenías, asegúrate que funcione)
+        // ==========================================
+        // 1. LOGIN (MODIFICADO CON SEGURIDAD)
+        // ==========================================
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest login)
         {
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == login.Email && u.Password == login.Password);
             if (usuario == null) return Unauthorized("Credenciales inválidas");
 
+            // --- BLOQUEO DE SEGURIDAD PARA RESTAURANTES ---
+            if (usuario.Rol == "Restaurante")
+            {
+                // Buscamos la ficha del restaurante asociada a este usuario
+                var restaurante = await _context.Restaurantes.FirstOrDefaultAsync(r => r.UsuarioId == usuario.Id);
+                
+                // Si existe y NO está aprobado, bloqueamos el acceso
+                if (restaurante != null && !restaurante.EstaAprobado)
+                {
+                    return Unauthorized("Tu cuenta está en revisión. Un administrador debe aprobar tu restaurante antes de poder ingresar.");
+                }
+            }
+            // ----------------------------------------------
+
             var token = GenerarToken(usuario);
             return Ok(new { token, rol = usuario.Rol, usuarioId = usuario.Id });
         }
 
-        // REGISTRO USUARIO NORMAL
+        // ==========================================
+        // 2. REGISTRO USUARIO (CLIENTE)
+        // ==========================================
         [HttpPost("registro-usuario")]
         public async Task<IActionResult> RegistrarUsuario([FromBody] RegistroUsuarioDTO dto)
         {
@@ -45,11 +64,11 @@ namespace reservasApp.Controllers
             {
                 Nombre = dto.Nombre,
                 ApellidoPaterno = dto.ApellidoPaterno,
-                ApellidoMaterno = dto.ApellidoMaterno, // Puede ser null
+                ApellidoMaterno = dto.ApellidoMaterno,
                 Email = dto.Email,
-                Password = dto.Password, // En producción usar Hash!
+                Password = dto.Password, // ¡Recuerda hashear en el futuro!
                 Telefono = dto.Telefono,
-                Rol = "Cliente" // Rol automático
+                Rol = "Cliente"
             };
 
             _context.Usuarios.Add(usuario);
@@ -58,38 +77,41 @@ namespace reservasApp.Controllers
             return Ok(new { message = "Usuario registrado exitosamente" });
         }
 
-        // REGISTRO RESTAURANTE
+        // ==========================================
+        // 3. REGISTRO RESTAURANTE (SIMPLIFICADO)
+        // ==========================================
         [HttpPost("registro-restaurante")]
         public async Task<IActionResult> RegistrarRestaurante([FromBody] RegistroRestauranteDTO dto)
         {
             if (await _context.Usuarios.AnyAsync(u => u.Email == dto.Email))
                 return BadRequest("El correo ya está registrado.");
 
-            // 1. Crear Usuario Dueño
-            var dueño = new UserModel
+            // Creamos el Usuario (Representa al negocio)
+            var usuarioNegocio = new UserModel
             {
-                Nombre = dto.NombreDueño,
+                Nombre = dto.NombreRestaurante, // El nombre del usuario es el del restaurante
                 Email = dto.Email,
                 Password = dto.Password,
-                Rol = "Restaurante" // Rol específico
+                Telefono = dto.Telefono,
+                Rol = "Restaurante"
             };
 
-            _context.Usuarios.Add(dueño);
-            await _context.SaveChangesAsync(); // Guardamos para obtener el ID
+            _context.Usuarios.Add(usuarioNegocio);
+            await _context.SaveChangesAsync();
 
-            // 2. Crear Restaurante (Pendiente de aprobación)
+            // Creamos la ficha del Restaurante (Pendiente de aprobación)
             var restaurante = new RestaurantModel
             {
                 Nombre = dto.NombreRestaurante,
-                Direccion = dto.Direccion,
-                UsuarioId = dueño.Id,
-                EstaAprobado = false // ¡Importante! El Admin debe aprobarlo
+                Direccion = "", // Se llenará en el perfil después
+                UsuarioId = usuarioNegocio.Id,
+                EstaAprobado = false // <--- Esto dispara la solicitud al admin
             };
 
             _context.Restaurantes.Add(restaurante);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Solicitud de restaurante enviada. Espera aprobación del administrador." });
+            return Ok(new { message = "Solicitud enviada. Tu cuenta se activará cuando un administrador la apruebe." });
         }
 
         private string GenerarToken(UserModel usuario)

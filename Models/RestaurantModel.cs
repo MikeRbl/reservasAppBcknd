@@ -11,7 +11,7 @@ namespace reservasApp.Models
     public string Direccion { get; set; } = string.Empty;
     public bool EstaAprobado { get; set; } = false;
     public int UsuarioId { get; set; } // Foreign key to the UserModel
-    public UserModel? Dueño { get; set; } // Navigation property for the owner
+    public UserModel? Dueno { get; set; } // Navigation property for the owner
     public List<MesaModel> Mesas { get; set; } = new(); // Navigation property for tables
 }
 }

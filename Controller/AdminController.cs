@@ -24,7 +24,7 @@ namespace reservasApp.Controllers
         {
             return await _context.Restaurantes
                                  .Where(r => !r.EstaAprobado)
-                                 .Include(r => r.Dueño) // Incluimos datos del dueño por si los necesitas
+                                 .Include(r => r.Dueno) // Incluimos datos del dueño por si los necesitas
                                  .ToListAsync();
         }
 
@@ -62,5 +62,45 @@ namespace reservasApp.Controllers
                 TotalRestaurantes = totalRestaurantes 
             });
         }
+        // GET: api/admin/activos
+        // Muestra los restaurantes que YA están funcionando
+        [HttpGet("activos")]
+        public async Task<ActionResult<List<RestaurantModel>>> GetRestaurantesActivos()
+        {
+            return await _context.Restaurantes
+                                 .Where(r => r.EstaAprobado) // Solo los aprobados
+                                 .Include(r => r.Dueno) // Usamos 'Dueno' sin ñ (según corrección anterior)
+                                 .ToListAsync();
+        }
+
+        // PUT: api/admin/pausar/5
+        // "Pausa" el restaurante quitándole la aprobación (vuelve a la lista de pendientes)
+        [HttpPut("pausar/{id}")]
+        public async Task<IActionResult> PausarRestaurante(int id)
+        {
+            var restaurante = await _context.Restaurantes.FindAsync(id);
+            if (restaurante == null) return NotFound();
+
+            restaurante.EstaAprobado = false; // Lo regresamos a false
+            await _context.SaveChangesAsync();
+
+            return Ok(new { mensaje = "Restaurante pausado. Ahora aparece en solicitudes pendientes." });
+        }
+
+        // DELETE: api/admin/eliminar/5
+        // Borra el restaurante permanentemente
+        [HttpDelete("eliminar/{id}")]
+        public async Task<IActionResult> EliminarRestaurante(int id)
+        {
+            var restaurante = await _context.Restaurantes.FindAsync(id);
+            if (restaurante == null) return NotFound();
+
+            _context.Restaurantes.Remove(restaurante);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { mensaje = "Restaurante eliminado permanentemente." });
+        }
     }
+
+    
 }

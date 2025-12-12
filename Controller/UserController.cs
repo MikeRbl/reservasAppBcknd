@@ -1,67 +1,64 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using reservasApp.DTOs;
 using reservasApp.Models;
-using reservasApp.Services;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace reservasApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize] // Cualquier usuario logueado puede usar esto
     public class UserController : ControllerBase
     {
-        private readonly IReservasService _reservasService;
         private readonly AppDbContext _context;
 
-        public UserController(IReservasService reservasService, AppDbContext context)
+        public UserController(AppDbContext context)
         {
-            _reservasService = reservasService;
             _context = context;
         }
 
+        // POST: api/user/reservar
         [HttpPost("reservar")]
-        public async Task<IActionResult> Reservar([FromBody] ReservacionCreacionDTO dto)
+        [Authorize(Roles = "Cliente")] // Solo clientes
+        public async Task<IActionResult> CrearReserva([FromBody] ReservacionCreacionDTO dto)
         {
-            // Obtener ID del usuario desde el Token
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0; // 0 o manejar error si no hay token
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            if (userId == 0) return Unauthorized("Debes iniciar sesión.");
+            // 1. Validar que el restaurante existe
+            var existeRestaurante = await _context.Restaurantes.AnyAsync(r => r.Id == dto.RestauranteId);
+            if (!existeRestaurante) return BadRequest("Restaurante no válido");
 
-            var resultado = await _reservasService.CrearReservacion(dto, userId);
+            // 2. Crear la reserva
+            var nuevaReserva = new ReservasModel
+            {
+                ClienteId = userId,
+                RestauranteId = dto.RestauranteId,
+                FechaHora = dto.FechaHora,
+                Estado = "Pendiente", // Siempre nace pendiente
+                // La mesa se puede asignar automáticamente aquí o manualmente por el admin después
+                MesaId = null 
+            };
 
-            if (resultado)
-                return Ok("Reservación creada con éxito.");
-            
-            return BadRequest("No se pudo crear la reservación.");
+            _context.Reservaciones.Add(nuevaReserva);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { mensaje = "Reserva solicitada. Espera confirmación del restaurante." });
         }
 
-        [HttpPut("cancelar/{id}")]
-        public async Task<IActionResult> Cancelar(int id)
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
-
-            var resultado = await _reservasService.CancelarReservacion(id, userId);
-
-            if (resultado)
-                return Ok("Reservación cancelada.");
-
-            return BadRequest("No se encontró la reservación o no es tuya.");
-        }
-        
+        // GET: api/user/mis-reservas
         [HttpGet("mis-reservas")]
-        public async Task<ActionResult<List<ReservasModel>>> GetMisReservas()
+        [Authorize(Roles = "Cliente")]
+        public async Task<ActionResult> GetMisReservas()
         {
-            // Obtener ID del usuario (Simulado por ahora, luego usarás Claims)
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null) return Unauthorized("Usuario no identificado.");
-            int userId = int.Parse(userIdClaim.Value);
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            return await _context.Reservaciones.Where(r => r.ClienteId == userId).Include(r => r.Restaurant).Include(r => r.Mesa).OrderByDescending(r => r.FechaHora).ToListAsync();
-}
+            var reservas = await _context.Reservaciones
+                                         .Where(r => r.ClienteId == userId)
+                                         .Include(r => r.Restaurant)
+                                         .OrderByDescending(r => r.FechaHora)
+                                         .ToListAsync();
+            return Ok(reservas);
+        }
     }
 }

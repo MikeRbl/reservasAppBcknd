@@ -1,100 +1,97 @@
-# ﻿ReservasApp - Backend API 🍽️ 
+# ReservasApp - Backend API 🍽️
 Este repositorio contiene el Backend para la plataforma ReservasApp, un sistema de gestión de reservas para restaurantes que conecta a comensales, dueños de negocios y administradores. El sistema gestiona el flujo completo desde el registro del restaurante, su aprobación administrativa, la configuración de mesas y la asignación inteligente de reservas.
+
 # 1. Video Demostrativo 🎥
 Instrucciones para el profesor: Haga clic en la imagen a continuación para ver la demostración del funcionamiento de los endpoints principales y la lógica algorítmica.
 
-> (Nota: Reemplaza PON_AQUI_TU_ID_DE_VIDEO con el ID real de tu video de YouTube una vez lo subas).
+[![Video Demo](https://img.youtube.com/vi/PON_AQUI_TU_ID_DE_VIDEO/0.jpg)](https://www.youtube.com/watch?v=PON_AQUI_TU_ID_DE_VIDEO)
+
+> (Nota: Reemplaza `PON_AQUI_TU_ID_DE_VIDEO` con el ID real de tu video de YouTube una vez lo subas).
 
 # 2. Descripción del Proyecto 📄
 El propósito de este proyecto es proveer una API RESTful robusta y segura para automatizar la gestión de reservas. Soluciona el problema de la asignación manual de mesas mediante un algoritmo de "Mejor Ajuste" (Best Fit) y asegura que solo restaurantes verificados puedan operar en la plataforma.
 
 ### Principales Funcionalidades:
-* Seguridad y Roles: Autenticación vía JWT con roles diferenciados (Super Admin, Restaurante, Cliente).
-
-* Flujo de Aprobación: Los restaurantes se registran pero no pueden operar hasta ser aprobados por un Administrador.
-
-* Gestión de Inventario: Los restaurantes pueden crear y gestionar su inventario de mesas.
-
-* Algoritmo de Asignación: Al aceptar una reserva, el sistema asigna automáticamente la mesa más adecuada según la capacidad requerida y la disponibilidad, optimizando el espacio.
-
-* Panel Administrativo: Control total para aprobar, pausar o eliminar restaurantes del sistema.
+* **Seguridad y Roles**: Autenticación vía JWT con roles diferenciados (Super Admin, Restaurante, Cliente).
+* **Flujo de Aprobación**: Los restaurantes se registran pero no pueden operar hasta ser aprobados por un Administrador.
+* **Gestión de Inventario**: Los restaurantes pueden crear y gestionar su inventario de mesas.
+* **Algoritmo de Asignación**: Al aceptar una reserva, el sistema asigna automáticamente la mesa más adecuada según la capacidad requerida y la disponibilidad, optimizando el espacio.
+* **Panel Administrativo**: Control total para aprobar, pausar o eliminar restaurantes del sistema.
 
 # 3. Endpoints Implementados Destacados 🚀
 A continuación, se describen 5 endpoints clave que demuestran la complejidad técnica del proyecto:
 
-`
-POST /api/auth/registro-restaurante
-`
+### `POST /api/auth/registro-restaurante`
 
-* Relevancia: Inicia el flujo de negocio creando simultáneamente un usuario dueño y una ficha de restaurante en estado "Pendiente", disparando la solicitud de aprobación.
+* **Relevancia**: Inicia el flujo de negocio creando simultáneamente un usuario dueño y una ficha de restaurante en estado "Pendiente", disparando la solicitud de aprobación.
 
-`
-POST /api/auth/login
-`
+### `POST /api/auth/login`
 
-* Relevancia: Implementa seguridad condicional. No solo verifica credenciales, sino que bloquea el acceso a restaurantes que aún no han sido aprobados por el administrador.
+* **Relevancia**: Implementa seguridad condicional. No solo verifica credenciales, sino que bloquea el acceso a restaurantes que aún no han sido aprobados por el administrador.
 
-`
-PUT /api/restaurant/gestionar-reserva
-`
+### `PUT /api/restaurant/gestionar-reserva`
 
-* Relevancia: Contiene la lógica principal. Si el dueño acepta una reserva sin elegir mesa manualmente, el sistema ejecuta un algoritmo para buscar la mesa libre con la capacidad mínima necesaria ("Best Fit") para la fecha y hora solicitada.
+* **Relevancia**: Contiene la lógica principal. Si el dueño acepta una reserva sin elegir mesa manualmente, el sistema ejecuta un algoritmo para buscar la mesa libre con la capacidad mínima necesaria ("Best Fit") para la fecha y hora solicitada.
 
-`
-GET /api/admin/solicitudes
-`
+### `GET /api/admin/solicitudes`
 
-* Relevancia: Endpoint exclusivo para el Super Admin que filtra y proyecta los datos de los restaurantes que requieren atención inmediata.
+* **Relevancia**: Endpoint exclusivo para el Super Admin que filtra y proyecta los datos de los restaurantes que requieren atención inmediata.
 
-`POST /api/user/reservar`
+### `POST /api/user/reservar`
 
-* Relevancia: Maneja la transacción principal del cliente, validando la existencia del restaurante y creando el registro inicial vinculado al usuario.
+* **Relevancia**: Maneja la transacción principal del cliente, validando la existencia del restaurante y creando el registro inicial vinculado al usuario.
 
 # 4. Instrucciones de Ejecución ⚙️
 Sigue estos pasos para ejecutar el proyecto en tu entorno local.
 
-Requerimientos del Sistema
-.NET SDK 8.0
+### Requerimientos del Sistema
+* .NET SDK 8.0
+* Docker Desktop (Para la base de datos MySQL)
+* Postman (Para pruebas)
 
-Docker Desktop (Para la base de datos MySQL)
+### Paso 1: Clonar y Restaurar
 
-Postman (Para pruebas)
-
-Paso 1: Clonar y Restaurar
-Bash
-
-` git clone <URL_DEL_REPOSITORIO>
+```bash
+git clone <URL_DEL_REPOSITORIO>
 cd reservasApp
-dotnet restore`
-Paso 2: Configuración Inicial (Base de Datos)
+dotnet restore
+```
+
+### Paso 2: Configuración Inicial (Base de Datos)
 El proyecto utiliza Docker para levantar la base de datos MySQL.
-
 Asegúrate de que Docker Desktop esté corriendo.
-
 Ejecuta el siguiente comando en la raíz del proyecto (donde está el docker-compose.yml):
 
-`docker-compose up -d`
+```bash
+docker-compose up -d
+```
 
 Esto levantará un contenedor MySQL con la contraseña configurada como YES.
 
-Paso 3: Aplicar Migraciones
+### Paso 3: Aplicar Migraciones
 Para crear las tablas en la base de datos, ejecuta:
 
-`dotnet ef database update`
+```bash
+dotnet ef database update
+```
 
-Paso 4: Iniciar el Servidor
+### Paso 4: Iniciar el Servidor
 
-`dotnet run` 
+```bash
+dotnet run
+```
 
 La API estará disponible en http://localhost:5160 (o el puerto indicado en tu consola).
 
-* Consideraciones Especiales
-Usuario Admin: No existe registro público para Administradores. Se debe insertar manualmente en la base de datos o usar el script SQL incluido en la carpeta docs/ (si aplica).
-
-* Cadena de Conexión: La configuración ya está lista en appsettings.json para conectar con el contenedor Docker local: Server=localhost;Port=3306;Database=ReservAppDb;User=root;Password=YES;
+### Consideraciones Especiales
+* **Usuario Admin**: No existe registro público para Administradores. Se debe insertar manualmente en la base de datos o usar el script SQL incluido en la carpeta `docs/` (si aplica).
+* **Cadena de Conexión**: La configuración ya está lista en `appsettings.json` para conectar con el contenedor Docker local:
+  ```
+  Server=localhost;Port=3306;Database=ReservAppDb;User=root;Password=YES;
+  ```
 
 # 5. Colección de Postman 📬
-El archivo de exportación de la colección de Postman (ReservasApp.postman_collection.json) se encuentra ubicado en la raíz de este repositorio.
+El archivo de exportación de la colección de Postman (`ReservasApp.postman_collection.json`) se encuentra ubicado en la raíz de este repositorio.
 
 ### Incluye ejemplos de:
 * Registro y Login (con obtención de Token Bearer).

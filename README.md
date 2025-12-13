@@ -25,21 +25,21 @@ A continuación, se describen 5 endpoints clave que demuestran la complejidad t�
 
 * **Relevancia**: Inicia el flujo de negocio creando simultáneamente un usuario dueño y una ficha de restaurante en estado "Pendiente", disparando la solicitud de aprobación.
 
-### `POST /api/admin/aprobar/{id}`
-
-* **Relevancia**: Ya que el usuario Admin sea ingresada se puede relizar la autorizacion del usuario restaurante.
-
-### `PUT /api/restaurant/gestionar-reserva`
-
-* **Relevancia**: Contiene la lógica principal. Si el dueño acepta una reserva sin elegir mesa manualmente, el sistema ejecuta un algoritmo para buscar la mesa libre con la capacidad mínima necesaria ("Best Fit") para la fecha y hora solicitada.
-
 ### `GET /api/admin/solicitudes`
 
 * **Relevancia**: Endpoint exclusivo para el Super Admin que filtra y proyecta los datos de los restaurantes que requieren atención inmediata.
 
+### `POST /api/admin/aprobar/{id}`
+
+* **Relevancia**: Ya que el usuario Admin sea ingresada se puede relizar la autorizacion del usuario restaurante.
+
 ### `POST /api/user/reservar`
 
 * **Relevancia**: Maneja la transacción principal del cliente, validando la existencia del restaurante y creando el registro inicial vinculado al usuario.
+
+### `PUT /api/restaurant/gestionar-reserva`
+
+* **Relevancia**: Contiene la lógica principal. Si el dueño acepta una reserva sin elegir mesa manualmente, el sistema ejecuta un algoritmo para buscar la mesa libre con la capacidad mínima necesaria ("Best Fit") para la fecha y hora solicitada.
 
 # 4. Instrucciones de Ejecución ⚙️
 Sigue estos pasos para ejecutar el proyecto en tu entorno local.

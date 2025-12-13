@@ -23,19 +23,26 @@ El propósito de este proyecto es proveer una API RESTful robusta y segura para 
 A continuación, se describen 5 endpoints clave que demuestran la complejidad técnica del proyecto:
 
 `
-POST /api/auth/registro-restaurante`bash
+POST /api/auth/registro-restaurante
+`
 
 * Relevancia: Inicia el flujo de negocio creando simultáneamente un usuario dueño y una ficha de restaurante en estado "Pendiente", disparando la solicitud de aprobación.
 
-`POST /api/auth/login`
+`
+POST /api/auth/login
+`
 
 * Relevancia: Implementa seguridad condicional. No solo verifica credenciales, sino que bloquea el acceso a restaurantes que aún no han sido aprobados por el administrador.
 
-`PUT /api/restaurant/gestionar-reserva`
+`
+PUT /api/restaurant/gestionar-reserva
+`
 
 * Relevancia: Contiene la lógica principal. Si el dueño acepta una reserva sin elegir mesa manualmente, el sistema ejecuta un algoritmo para buscar la mesa libre con la capacidad mínima necesaria ("Best Fit") para la fecha y hora solicitada.
 
-`GET /api/admin/solicitudes`
+`
+GET /api/admin/solicitudes
+`
 
 * Relevancia: Endpoint exclusivo para el Super Admin que filtra y proyecta los datos de los restaurantes que requieren atención inmediata.
 

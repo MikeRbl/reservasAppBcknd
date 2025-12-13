@@ -1,0 +1,563 @@
+{
+  "info": {
+    "_postman_id": "7b88c7b0-f6f4-44a2-857e-07ef367ee478",
+    "name": "ReserApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login Usuario",
+      "id": "5f7dc78e-2317-4fd8-980d-45e4b845eadb",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"miguel@gmail.com\",\r\n  \"password\": \"123456789\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/Auth/login",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "Auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Restaurante",
+      "id": "8f2ca75e-ed28-4e87-bcfc-1aec4debb7ce",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"francesco@gmail.com\",\r\n  \"password\": \"123456789\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/Auth/login",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "Auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Admin",
+      "id": "a7fe14ab-4950-4cc6-8bc1-4ed42f419739",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"admin@reservas.com\",\r\n  \"password\": \"admin123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/Auth/login",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "Auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar Usuario",
+      "id": "a072ab82-a8ed-47cb-abfe-1c2b06dc053e",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"\",\r\n  \"apellidoPaterno\": \"\",\r\n  \"apellidoMaterno\": \"\",\r\n  \"telefono\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"123456789\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/Auth/registro-usuario",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "Auth",
+            "registro-usuario"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Registro Restaurante",
+      "id": "3289bbb0-256c-41ca-8579-190b6a69282a",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombreRestaurante\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"telefono\": \"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/Auth/registro-restaurante",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "Auth",
+            "registro-restaurante"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ver Solicitudes Pendientes",
+      "id": "be224ee3-3984-48d0-8cd8-5dd4746c3d47",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkByZXNlcnZhcy5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc2NTYwNDUyNywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.mNhBXbPmBIl1MOB9rlvMGT8f_tE4fw58iyIhJmFvP0Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/admin/solicitudes",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "admin",
+            "solicitudes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Aprobar Restaurante",
+      "id": "a1f4f8ee-d1af-43db-ad7b-f91198b04d86",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkByZXNlcnZhcy5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc2NTYwNDUyNywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.mNhBXbPmBIl1MOB9rlvMGT8f_tE4fw58iyIhJmFvP0Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/admin/aprobar/",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "admin",
+            "aprobar",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ver Restaurantes Activos",
+      "id": "50c44b4e-d45c-4ffc-b82d-29ec9e72b5e1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/admin/activos",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "admin",
+            "activos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Pausar Restaurante",
+      "id": "a0bcb7f6-01d0-4261-b11f-b32db8758c21",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/admin/pausar/{}",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "admin",
+            "pausar",
+            "{}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar Restaurante",
+      "id": "624a4412-4c86-4b33-8965-1c224e1e5107",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/admin/eliminar/{}",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "admin",
+            "eliminar",
+            "{}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ver Perfil Restaurante",
+      "id": "e79e3b6c-64ae-4114-8a6e-1632f2c6c036",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/restaurant/mi-perfil",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "restaurant",
+            "mi-perfil"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar Perfil Restaurante",
+      "id": "e81e4fe7-19b7-4be8-851b-363e6ebf2dec",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"\",\r\n  \"direccion\": \"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/restaurant/actualizar-perfil",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "restaurant",
+            "actualizar-perfil"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear mesa",
+      "id": "c789d8e7-47f5-45dd-8437-33833cb30f95",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJmcmFuY2VzY29AZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVzdGF1cmFudGUiLCJleHAiOjE3NjU2MTAxMjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.3BiSch6OV8BJIvBO0-3VOSpLbqeegXil7ns766A2Br8",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"numeroMesa\": \"terraza 1\",\r\n  \"capacidad\": 10\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/restaurant/mesas",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "restaurant",
+            "mesas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ver mesas",
+      "id": "c346fa04-4c0f-4971-8608-726e6b58f57e",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJmcmFuY2VzY29AZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVzdGF1cmFudGUiLCJleHAiOjE3NjU2MTAxMjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.3BiSch6OV8BJIvBO0-3VOSpLbqeegXil7ns766A2Br8",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/restaurant/mesas",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "restaurant",
+            "mesas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ver Reservas",
+      "id": "ad101640-7c10-44cd-bb6e-636b528df7ff",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtYW1hbWlhY2FtcGVzdHJlQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlc3RhdXJhbnRlIiwiZXhwIjoxNzY1NjA3MTA3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.zkiuw5CgxJ9g4NsRQtp4rN6bry-aYg7l0DWmfPs4OPc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/restaurant/mis-reservas",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "restaurant",
+            "mis-reservas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Gestionar reservas",
+      "id": "41674cbe-64dc-4819-94f8-5114a1d8f2b5",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtYW1hbWlhY2FtcGVzdHJlQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlc3RhdXJhbnRlIiwiZXhwIjoxNzY1NjA3MTA3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.zkiuw5CgxJ9g4NsRQtp4rN6bry-aYg7l0DWmfPs4OPc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"reservaId\": 1,\r\n  \"aprobada\": true,\r\n  \"mesaId\": null \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/restaurant/gestionar-reserva",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "restaurant",
+            "gestionar-reserva"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ver Restaurantes",
+      "id": "2185795a-4d80-479c-bff6-7dec3cae6d4e",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/restaurant/publicos",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "restaurant",
+            "publicos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear Reserva",
+      "id": "8384e8a1-3e01-42a7-ad48-199da821d656",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtaWd1ZWxAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ2xpZW50ZSIsImV4cCI6MTc2NTYwNzIyMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.5HhAqLDrNPxVD4sCTvF2J85NbPf68fhylQlhthUPZQo",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"restauranteId\": 4,\r\n  \"fechaHora\": \"2025-12-15T15:00:00\",\r\n  \"numeroPersonas\": 4\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{api_base}}/user/reservar",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "user",
+            "reservar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ver mis reservas",
+      "id": "3b7a60b3-24b5-44a4-ba03-bfd15dee0a04",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{api_base}}/user/mis-reservas",
+          "host": [
+            "{{api_base}}"
+          ],
+          "path": [
+            "user",
+            "mis-reservas"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "d75fd9c1-6dda-4ef2-ac27-64ed4c53a3fc",
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "c5244d86-a65e-4adf-98ad-6edf49ad59a8",
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "829f522a-3047-4558-8164-69ac2f301277",
+      "key": "api_base",
+      "value": ""
+    }
+  ]
+}

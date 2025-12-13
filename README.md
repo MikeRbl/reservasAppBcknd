@@ -4,9 +4,8 @@ Este repositorio contiene el Backend para la plataforma ReservasApp, un sistema 
 # 1. Video Demostrativo 🎥
 Instrucciones para el profesor: Haga clic en la imagen a continuación para ver la demostración del funcionamiento de los endpoints principales y la lógica algorítmica.
 
-[![Video Demo](https://img.youtube.com/vi/PON_AQUI_TU_ID_DE_VIDEO/0.jpg)](https://www.youtube.com/watch?v=PON_AQUI_TU_ID_DE_VIDEO)
+[![Video Demo](https://i9.ytimg.com/vi/mtgIDBOWozs/mqdefault.jpg?sqp=CNz688kG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8%3D&rs=AOn4CLAvB8M0mWEMlTdhmZd6GDY9ahZ15w&retry=3)](https://youtu.be/mtgIDBOWozs)
 
-> (Nota: Reemplaza `PON_AQUI_TU_ID_DE_VIDEO` con el ID real de tu video de YouTube una vez lo subas).
 
 # 2. Descripción del Proyecto 📄
 El propósito de este proyecto es proveer una API RESTful robusta y segura para automatizar la gestión de reservas. Soluciona el problema de la asignación manual de mesas mediante un algoritmo de "Mejor Ajuste" (Best Fit) y asegura que solo restaurantes verificados puedan operar en la plataforma.

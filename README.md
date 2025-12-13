@@ -25,9 +25,9 @@ A continuación, se describen 5 endpoints clave que demuestran la complejidad t�
 
 * **Relevancia**: Inicia el flujo de negocio creando simultáneamente un usuario dueño y una ficha de restaurante en estado "Pendiente", disparando la solicitud de aprobación.
 
-### `POST /api/auth/login`
+### `POST /api/admin/aprobar/{id}`
 
-* **Relevancia**: Implementa seguridad condicional. No solo verifica credenciales, sino que bloquea el acceso a restaurantes que aún no han sido aprobados por el administrador.
+* **Relevancia**: Ya que el usuario Admin sea ingresada se puede relizar la autorizacion del usuario restaurante.
 
 ### `PUT /api/restaurant/gestionar-reserva`
 
